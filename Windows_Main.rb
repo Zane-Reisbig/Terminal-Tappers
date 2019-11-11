@@ -18,7 +18,7 @@ def Menu
   puts """
   Welcome to Terminal Tappers!
 
-  Push the space bar to attack
+  Push the enter key to attack
 
   Press enter to continue...
   """
@@ -42,10 +42,8 @@ def Game(player,level,monsterDefeated)
       break
     end
     attacker.Display
-    system("stty raw -echo") #=> Raw mode, no echo
-    char = STDIN.getc
-    system("stty -raw echo") #=> Reset terminal mode
-    if char == " "
+    char = gets.chomp
+    if char == ""
       attacker.Hit(player.attackPower)
       player.Level(rand(1..5))
     end
@@ -67,8 +65,9 @@ def Interp(choice,player)
 
   if choice.upcase == "Y"
     Shop(player)
+    return 1
   else
-    return
+    return 0
   end
 
 end
@@ -108,7 +107,7 @@ def Shop(player)
   end
 end
 
-def StageIncrease(player, monsterDefeated,level)
+def StageIncrease(player, monsterDefeated, level)
 
   if monsterDefeated == 5
     level.StageUp
