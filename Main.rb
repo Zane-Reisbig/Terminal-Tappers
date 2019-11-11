@@ -79,33 +79,27 @@ def Shop(player)
   puts "1: +1 Attack Damage - 1 skill point"
   puts "2: +2 Attack Damage - 2 skill points"
   choice = ""
-  loop do
-    puts "YOU HAVE #{player.skillPoints} REMAINING"
-    print "What to buy: "
-    choice = gets.chomp
-    if choice == "1"
-      if player.skillPoints < 1
-        print "You cant afford that silly \n"
-      else
-        player.AttackUp(1)
-        player.ShopBuy(1)
-      end
-    elsif choice == "2"
-      if player.skillPoints < 2
-        print "You cant afford that silly \n"
-      else
-        player.AttackUp(2)
-        player.ShopBuy(2)
-      end
+  puts "YOU HAVE #{player.skillPoints} REMAINING"
+  print "What to buy: "
+  choice = gets.chomp
+  if choice == "1"
+    if player.skillPoints < 1
+      print "You cant afford that silly \n"
     else
-      x = choice.split("")
-      if x[0] == "e" or x[0] == "E"
-        puts
-        break
-      end
-      Shop(player)
+      player.AttackUp(1)
+      player.ShopBuy(1)
     end
+  elsif choice == "2"
+    if player.skillPoints < 2
+      print "You cant afford that silly \n"
+    else
+      player.AttackUp(2)
+      player.ShopBuy(2)
+    end
+  elsif choice.upcase == "EXIT"
+    return
   end
+  Shop(player)
 end
 
 def StageIncrease(player, monsterDefeated,level)
