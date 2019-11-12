@@ -20,6 +20,12 @@ def Menu
 
   Push the space bar to attack
 
+  Push 'x' to see how much xp you need
+
+  Push 'e' to see how much xp you have
+
+  Push 'd' to see how much damage your doing 
+
   Press enter to continue...
   """
   gets()
