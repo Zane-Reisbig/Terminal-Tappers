@@ -39,6 +39,9 @@ def Game(player,level,monsterDefeated)
     if attacker.health <= 0
       monsterDefeated += 1
       puts "#{attacker.name} has been defeated!"
+      x = (attacker.health * 0.5) + rand(5..10) * level.gamestage
+      player.Level(x)
+      puts "You got #{x} xp!"
       break
     end
     attacker.Display
@@ -47,17 +50,16 @@ def Game(player,level,monsterDefeated)
     system("stty -raw echo") #=> Reset terminal mode
     if char == " "
       attacker.Hit(player.attackPower)
-      player.Level(rand(1..5))
     end
 
     if char == "d"
-      puts player.attackPower
+      puts "Current attack power is #{player.attackPower}"
     end
     if char == "x"
-      puts player.xp
+      puts "You need #{player.xp} xp"
     end
     if char == "e"
-      puts player.xpHave
+      puts "You have #{player.xpHave} xp"
     end
   end
 Game(player,level,monsterDefeated)
@@ -116,11 +118,10 @@ def StageIncrease(player, monsterDefeated,level)
     if choice == ""
       StageIncrease(player, monsterDefeated, level)
     end
-    Interp(choice,player)
-    return 0
+      Interp(choice,player)
+      return 0
   end
   return monsterDefeated
 end
-
 
 Menu()
