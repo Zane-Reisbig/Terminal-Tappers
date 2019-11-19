@@ -24,7 +24,7 @@ def Menu
 
   Push 'e' to see how much xp you have
 
-  Push 'd' to see how much damage your doing 
+  Push 'd' to see how much damage your doing
 
   Press enter to continue...
   """
@@ -73,7 +73,7 @@ end
 
 def Interp(choice,player)
 
-  if choice.upcase == "Y"
+  if choice.upcase.strip == "Y"
     Shop(player)
   else
     return
@@ -113,19 +113,27 @@ end
 def StageIncrease(player, monsterDefeated,level)
 
   if monsterDefeated == 5
-    level.StageUp
-    puts
-    puts "You have advanced a stage!"
-    puts
-    puts
-    puts "Would you like to enter the shop?"
-    print "[Y/N]: "
-    choice = gets.chomp
-    if choice == ""
-      StageIncrease(player, monsterDefeated, level)
-    end
-      Interp(choice,player)
+    if player.skillPoints > 0
+      level.StageUp
+      puts
+      puts "You have advanced a stage!"
+      puts
+      puts
+      puts "You curently have #{player.skillPoints} skill points"
+      puts "Would you like to enter the shop?"
+      print "[Y/N]: "
+      choice = gets.chomp
+      if choice == ""
+        StageIncrease(player, monsterDefeated, level)
+      end
+        Interp(choice,player)
+        return 0
+    else
+      puts
+      puts "Level Advance!"
+      puts
       return 0
+    end
   end
   return monsterDefeated
 end
